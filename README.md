@@ -1,4 +1,4 @@
 kvm-installer
 =============
 
-Abiquo cloud node instalation scripts for CentOS 6
+Abiquo cloud node installation scripts for RHEL/CentOS 6
