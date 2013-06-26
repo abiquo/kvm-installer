@@ -12,14 +12,6 @@ if [ -f "/etc/redhat-release" ]; then
         exit 1
 fi
 
-echo -n "Checking previous versions... "
-if [`abiquo-aim -v` != "AIM server version 1.5.2"]; then
-        echo "AIM version does not match." 
-        exit 1
-    else 
-	echo "OK."
-fi
-
 read -p "Upgrading Abiquo KVM, continue (y/n)? " ans
 
 if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
@@ -45,6 +37,7 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
             echo "Done."
     else
             echo "Failed!"
+	    exit 1
     fi
 
     echo -n "Upgrading libvirt guests... "
@@ -59,10 +52,6 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
     echo -n "Starting aim... "
     # Start aim service
     service abiquo-aim start >> $LOG_FILE 2>&1
-    if [ $? == 0 ]; then
-            echo "Done."
-    else
-            echo "Failed!"
-    fi
+    echo "Done."
 fi
 
