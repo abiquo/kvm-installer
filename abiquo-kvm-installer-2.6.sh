@@ -42,15 +42,6 @@ read -p "Installing Abiquo KVM, continue (y/n)? " ans
 
 if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
 
-	echo -n "Installing required packages... "
-	yum install  dmidecode initscripts vconfig -y >> $LOG_FILE 2>&1
-	if [ $? == 0 ]; then
-		echo "Done."
-	else
-		echo "Failed!"
-		exit 1
-	fi
-
 	echo -n "Installing Abiquo release... "
 	rpm -Uvh ${MIRROR_URL}abiquo-latest-release.noarch.rpm  >> $LOG_FILE 2>&1 
 	if [ $? == 0 ]; then
@@ -70,34 +61,8 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
 		exit 1
 	fi
 
-	echo -n "Installing abiquo cloud node... "
-	yum install abiquo-cloud-node -y >> $LOG_FILE 2>&1
-	if [ $? == 0 ]; then
-		echo "Done."
-	else
-		echo "Failed!"
-		exit 1
-	fi
-
-	echo -n "Installing libvirt... "
-	yum install libvirt libvirt-client libvirt-lock-sanlock -y >> $LOG_FILE 2>&1
-	if [ $? == 0 ]; then
-		echo "Done."
-	else
-		echo "Failed!"
-		exit 1
-	fi
-
-	echo -n "Installing abiquo-aim... "
-	yum install abiquo-aim -y >> $LOG_FILE 2>&1
-	if [ $? == 0 ]; then
-		echo "Done."
-	else
-		echo "Failed!"
-		exit 1
-	fi
-
-	echo -n "Installing abiquo-cloud-node... "
+	echo -n "Installing abiquo cloud node packages... "
+	yum clean all -y >> $LOG_FILE 2>&1
 	yum install abiquo-cloud-node -y >> $LOG_FILE 2>&1
 	if [ $? == 0 ]; then
 		echo "Done."
@@ -150,7 +115,7 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
 	service iptables stop >> $LOG_FILE 2>&1
 	service abiquo-aim start >> $LOG_FILE 2>&1
 
-	if [ `getenforce` != 'Enabled' ]; then
+	if [ `getenforce` == 'Enabled' ]; then
 	    echo "SElinux is enabled, please reboot."
 	fi
 
