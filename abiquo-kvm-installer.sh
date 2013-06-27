@@ -3,6 +3,8 @@
 YUM_DIR=/etc/yum.repos.d/
 LOG_FILE=abiquo-kvm-install.log
 AIM_CONF=/etc/abiquo-aim.ini
+LIBVIRT_GUEST_CONF=/etc/sysconfig/libvirt-guests
+SELINUX_CONF=/etc/sysconfig/selinux
 
 # Change this URL if you want to use a local repository:
 MIRROR_URL=http://mirror.abiquo.com/abiquo/el6/
@@ -105,7 +107,7 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
 	sed -i "s,#ON_SHUTDOWN=suspend,ON_SHUTDOWN=shutdown," $LIBVIRT_GUEST_CONF >>     $LOG_FILE 2>&1
 	
 	# Selinux disabled by default
-	sed -i "s,SELINUX=enforcing,SELINUX=disabled," $LIBVIRT_GUEST_CONF >>     $LOG_FILE 2>&1
+	sed -i "s,SELINUX=enforcing,SELINUX=disabled," $SELINUX_CONF >>     $LOG_FILE 2>&1
 
 	echo -n "Configuring services ... "
 
