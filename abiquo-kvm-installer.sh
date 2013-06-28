@@ -63,9 +63,9 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
 		exit 1
 	fi
 
-	echo -n "Installing abiquo cloud node packages... "
+	echo -n "Installing abiquo cloud node and KVM packages... "
 	yum clean all -y >> $LOG_FILE 2>&1
-	yum install abiquo-cloud-node -y >> $LOG_FILE 2>&1
+	yum install abiquo-cloud-node qemu-kvm -y >> $LOG_FILE 2>&1
 	if [ $? == 0 ]; then
 		echo "Done."
 	else
