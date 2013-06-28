@@ -114,6 +114,7 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
 	chkconfig iptables off >> $LOG_FILE 2>&1
 	chkconfig selinux off >> $LOG_FILE 2>&1
 	chkconfig abiquo-aim on >> $LOG_FILE 2>&1
+	chkconfig rpcbind on >> $LOG_FILE 2>&1
 	service iptables stop >> $LOG_FILE 2>&1
 	service abiquo-aim start >> $LOG_FILE 2>&1
 
