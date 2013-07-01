@@ -32,7 +32,7 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
     rpm -Uvh $MIRROR_URL/abiquo-latest-release.noarch.rpm >> $LOG_FILE 2>&1
     # Upgrade packages
     yum clean all >> $LOG_FILE 2>&1
-    yum -y install abiquo-cloud-node libvirt qemu-kvm >> $LOG_FILE 2>&1
+    yum -y upgrade abiquo-cloud-node abiquo-aim libvirt qemu-kvm >> $LOG_FILE 2>&1
     if [ $? == 0 ]; then
             echo "Done."
     else
