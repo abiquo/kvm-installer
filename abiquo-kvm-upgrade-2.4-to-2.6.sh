@@ -1,6 +1,7 @@
 #!/bin/bash
 
 LOG_FILE=abiquo-kvm-install.log
+LIBVIRT_GUEST_CONF=/etc/sysconfig/libvirt-guests
 # Change this URL if you want to use a local repository:
 MIRROR_URL=http://mirror.abiquo.com/abiquo/el6/
 
@@ -47,6 +48,8 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
     find /etc/libvirt/qemu/ABQ*.xml -exec sed -i /loader/d {} \; >> $LOG_FILE 2>&1
     # Redefine all guests 
     find /etc/libvirt/qemu/ABQ*.xml -exec virsh define {} \; >> $LOG_FILE 2>&1
+    # Disable suspend
+    sed -i "s,#ON_SHUTDOWN=suspend,ON_SHUTDOWN=shutdown," $LIBVIRT_GUEST_CONF >>     $LOG_FILE 2>&1
     echo "Done."
 
     echo -n "Starting aim... "
