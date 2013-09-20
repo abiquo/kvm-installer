@@ -30,7 +30,7 @@ if [[ "${ans}" == 'y'  ||  "${ans}" == 'yes' ]]; then
     sed -i /exclude=libvirt/d /etc/yum.conf >> $LOG_FILE 2>&1
     sed -i /abiquo/d /etc/yum.conf >> $LOG_FILE 2>&1
     #Install abiquo release
-    rpm -Uvh $MIRROR_URL/abiquo-latest-release.noarch.rpm >> $LOG_FILE 2>&1
+    rpm -Uvh $MIRROR_URL/2.6/os/x86_64/abiquo-release-ee-2.6.0-1.el6.noarch.rpm >> $LOG_FILE 2>&1
     # Upgrade packages
     yum clean all >> $LOG_FILE 2>&1
     yum -y upgrade abiquo-cloud-node abiquo-aim libvirt qemu-kvm >> $LOG_FILE 2>&1
