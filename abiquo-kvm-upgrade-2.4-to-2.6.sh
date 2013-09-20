@@ -55,5 +55,4 @@ echo -n "Starting aim... "
 # Start aim service
 service abiquo-aim start >> $LOG_FILE 2>&1
 echo "Done."
-fi
 
